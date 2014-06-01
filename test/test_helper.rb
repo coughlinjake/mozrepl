@@ -18,7 +18,7 @@ require 'minitest/autorun'
 require 'minitest/reporters'
 MiniTest::Reporters.use!
 
-# the run mode must be set BEFORE we require project
+# the run mode must be set BEFORE we require wad
 require 'wad'
 
 require 'data-utils'

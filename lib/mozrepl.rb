@@ -4,7 +4,7 @@ require 'uri'
 require 'multi_json'
 require 'posix-spawn'
 
-require 'project'
+require 'wad'
 require 'path-utils'
 
 module MozRepl

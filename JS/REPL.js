@@ -934,11 +934,13 @@ function tab_new(params) {
         on_succ = function(rc) { repl.rc_ok(rc); };
     }
 
-    var tab = browser.addTab('about:blank');
+    var url = params['url'] || 'about:blank';
+    var tab = browser.addTab(url);
     var newTabBrowser = browser.getBrowserForTab(tab);
 
     var on_page_load = function () {
-        newTabBrowser.contentDocument.body.innerHTML = "<div>Hello, new tab!</div>";
+        // newTabBrowser.contentDocument.body.innerHTML = "<div>Hello, new tab!</div>";
+        newTabBrowser.contentDocument.location.href = url;
         newTabBrowser.removeEventListener("load", on_page_load, true);
         browser.tabContainer.selectedItem = tab;
         on_succ(newTabBrowser.contentDocument.location.href);
