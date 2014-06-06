@@ -43,7 +43,7 @@ FRAMES = [
 #    },
 #].freeze
 
-require 'wad'
+require 'brewed'
 Log.open :'>1', :output
 
 require 'mozrepl'

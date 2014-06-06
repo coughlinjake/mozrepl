@@ -5,7 +5,7 @@ require 'psych'
 ENV['MOZREPL_GEM_MODE'] ||= 'development'
 ENV['RACK_ENV'] = ENV['MOZREPL_GEM_MODE']
 
-require 'wad'
+require 'brewed'
 Log.open :'>1', :output
 
 require 'mozrepl'
