@@ -30,7 +30,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'awesome_print'
   spec.add_development_dependency 'pry'
 
-  spec.add_dependency 'brewed', '~> 0.0.6'
+  spec.add_dependency 'brewed', '~> 0.1.0'
   spec.add_dependency 'psych'
   spec.add_dependency 'multi_json'
   spec.add_dependency 'oj'
