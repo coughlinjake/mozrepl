@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-require 'exceptions'
+require 'brewed/exceptions'
 
 module MozRepl
 

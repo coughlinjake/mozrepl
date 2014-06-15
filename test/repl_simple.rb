@@ -2,11 +2,14 @@
 
 require 'psych'
 
-ENV['MOZREPL_GEM_MODE'] ||= 'development'
-ENV['RACK_ENV'] = ENV['MOZREPL_GEM_MODE']
+ENV['MOZREPL_MODE'] ||= 'development'
+ENV['RACK_ENV'] = ENV['MOZREPL_MODE']
 
 require 'brewed'
-Log.open :'>1', :output
+
+Log.open :id    => :mozrepl,
+         :fname => '__mozrepl.rlog',
+         :level => :debug
 
 require 'mozrepl'
 

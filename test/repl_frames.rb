@@ -2,26 +2,26 @@
 
 require 'psych'
 
-ENV['MOZREPL_GEM_MODE'] ||= 'development'
-ENV['RACK_ENV'] = ENV['MOZREPL_GEM_MODE']
+ENV['MOZREPL_MODE'] ||= 'development'
+ENV['RACK_ENV'] = ENV['MOZREPL_MODE']
 
-URL = 'http://127.0.0.1:9000/frames/index.html'.freeze
+URL = 'http://localhost:9000/'.freeze
 
 FRAMES = [
     {
         :name => 'bottom',
-        :frame_url => "/frames/bottom.html",
+        :frame_url => "bottom.html",
         :xpath => '//h1[@id="bottom"]',
     },
     {
         :name => 'menu',
-        :frame_url => "/frames/sidebar.html",
-        :xpath => '//a[@id="blocks-classes"]',
+        :frame_url => "sidebar.html",
+        :xpath => '//a[@id="parent-folder"]',
     },
     {
         :name => 'main',
-        :frame_url => "/frames/main.html",
-        :xpath => '//a[@id="parent-folder"]',
+        :frame_url => "main.html",
+        :xpath => '//h2[@id="main_frame"]',
     },
 ].freeze
 
@@ -44,9 +44,14 @@ FRAMES = [
 #].freeze
 
 require 'brewed'
-Log.open :'>1', :output
+Log.open :id    => :mozrepl,
+         :fname => '__mozrepl.rlog',
+         :level => :debug
 
 require 'mozrepl'
+
+puts "\n==WARNING==\n"
+puts "DON'T FORGET TO START THE SERVER WITH ./__darkhttp.sh!!"
 
 MozRepl.lock_repl do
   mozrepl = MozRepl.new
@@ -73,5 +78,3 @@ MozRepl.lock_repl do
 end
 
 puts "\nDONE!"
-
-mozrepl.close

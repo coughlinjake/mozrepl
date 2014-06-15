@@ -2,27 +2,29 @@
 
 require 'psych'
 
-ENV['MOZREPL_GEM_MODE'] ||= 'development'
-ENV['RACK_ENV'] = ENV['MOZREPL_GEM_MODE']
+ENV['MOZREPL_MODE'] ||= 'development'
+ENV['RACK_ENV'] = ENV['MOZREPL_MODE']
 
 require 'brewed'
-Log.open :'>1', :output
+Log.open :id    => :mozrepl,
+         :fname => '__mozrepl.rlog',
+         :level => :debug
 
 require 'mozrepl'
 
 URLS =
-    %w[
-        http://www.newsobserver.com/
-        http://getbootstrap.com/customize/
-        http://www.tvrage.com/mytvrage.php?page=myschedule
-      ].freeze
+    [
+        [ 'http://www.newsobserver.com/',                       'newsobserver.com' ],
+        [ 'http://getbootstrap.com/customize/',                 'getbootstrap' ],
+        [ 'http://www.tvrage.com/mytvrage.php?page=myschedule', 'mytvrage' ]
+    ].freeze
 
 MozRepl.lock_repl do
   mozrepl = MozRepl.new
   actor   = mozrepl.actor
 
   puts "\nCreating tabs and navigating to URLs..."
-  URLS.each do |url|
+  URLS.each do |(url, tabpat)|
     puts "\n\t#{url}"
     tabs = actor.add_tab
     puts Psych.dump(tabs)
@@ -34,8 +36,8 @@ MozRepl.lock_repl do
 
   puts "\nActivating tabs..."
   [0, 2, 1].each do |tabidx|
-    puts "\n\tactivating #{URLS[tabidx]}"
-    rc = actor.activate_tab URLS[tabidx]
+    puts "\n\tactivating #{URLS[tabidx][1]}"
+    rc = actor.activate_tab URLS[tabidx][1]
     sleep 2
   end
 

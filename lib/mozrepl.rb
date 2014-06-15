@@ -5,10 +5,10 @@ require 'multi_json'
 require 'posix-spawn'
 
 require 'brewed'
-require 'path-utils'
+require 'brewed/path/lock'
 
 module MozRepl
-  MOZREPL_LOCKFN = PathUtils.absolute_lockfn('Firefox_MozRepl.lock').freeze
+  MOZREPL_LOCKFN = Brewed::Path.absolute_lockfn('Firefox_MozRepl.lock').freeze
 end
 
 require 'mozrepl/exceptions'
@@ -59,13 +59,13 @@ module MozRepl
     elsif not block_given?
       # non-block form of lock_file returns the lock object itself.
       # store the lock object in the MozRepl class for safe-keeping.
-      lock = PathUtils.lock_file PathUtils.absolute_lockfn(LOCK_REPL_BASENAME)
+      lock = Brewed::Path.lock_file Brewed::Path.absolute_lockfn(LOCK_REPL_BASENAME)
       MozRepl.__repl_lock lock
       rc = true
 
     else
       begin
-        PathUtils.lock_file(PathUtils.absolute_lockfn LOCK_REPL_BASENAME) do
+        Brewed::Path.lock_file(Brewed::Path.absolute_lockfn LOCK_REPL_BASENAME) do
           MozRepl.__repl_lock
           rc = yield
         end

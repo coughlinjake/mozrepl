@@ -1,6 +1,6 @@
 
-ENV['JOBMGR_MODE'] ||= 'development'
-ENV['RACK_ENV'] = ENV['JOBMGR_MODE']
+ENV['MOZREPL_MODE'] ||= 'development'
+ENV['RACK_ENV'] = ENV['MOZREPL_MODE']
 
 require 'psych'
 require 'pathname'
@@ -20,8 +20,7 @@ MiniTest::Reporters.use!
 
 # the run mode must be set BEFORE we require brewed
 require 'brewed'
-
-require 'data-utils'
+require 'brewed/data'
 
 class TestHelper
   DATA_DIR  = (TEST_ROOT + 'data').freeze

@@ -5,6 +5,8 @@ require 'net/telnet'
 
 require 'multi_json'
 
+require 'brewed/data'
+
 module MozRepl
 
   ##
@@ -51,7 +53,7 @@ module MozRepl
   ## == MozRepl::Client ==
   ##
   class Client < Net::Telnet
-    include ParamUtils
+    include ::Brewed::ParamUtils
 
     MATCH     = 'Match'.freeze
     STRING    = 'String'.freeze
